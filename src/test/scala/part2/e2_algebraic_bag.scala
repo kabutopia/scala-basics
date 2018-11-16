@@ -41,22 +41,22 @@ class e2_algebraic_bag extends HandsOnSuite {
 
   case object EmptyBag extends Bag {
 
-    override def map(function:Int => Int):Bag = ???
+    override def map(function:Int => Int):Bag = EmptyBag
 
-    override def flatMap(function:Int => Bag):Bag = ???
+    override def flatMap(function:Int => Bag):Bag = EmptyBag
 
-    override def filter(function:Int => Boolean):Bag = ???
+    override def filter(function:Int => Boolean):Bag = EmptyBag
 
     override def contentOrElse(replacement:Int):Int = replacement
   }
 
   case class FilledBag(content:Int) extends Bag {
 
-    override def map(function:Int => Int):Bag = ???
+    override def map(function:Int => Int):Bag = Bag(function(content))
 
-    override def flatMap(function:Int => Bag):Bag = ???
+    override def flatMap(function:Int => Bag):Bag = function(content)
 
-    override def filter(function:Int => Boolean):Bag = ???
+    override def filter(function:Int => Boolean):Bag = if ( function(content) ) Bag(content) else EmptyBag
 
     override def contentOrElse(replacement:Int):Int = content
   }
